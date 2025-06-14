@@ -1,80 +1,3 @@
-// CTC Tea Manufacturing Record Web App - Clean Rebuild
-
-// File: lib/supabaseClient.js
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-
-// File: components/ui/Button.js
-export function Button({ children, ...props }) {
-  return (
-    <button className="px-4 py-2 bg-blue-600 text-white rounded" {...props}>
-      {children}
-    </button>
-  );
-}
-
-
-// File: components/ui/Input.js
-export function Input({ ...props }) {
-  return (
-    <input
-      className="p-2 border rounded w-full"
-      {...props}
-    />
-  );
-}
-
-
-// File: components/ui/Card.js
-export function Card({ children }) {
-  return (
-    <div className="bg-white rounded shadow p-4 mb-4">
-      {children}
-    </div>
-  );
-}
-
-export function CardContent({ children }) {
-  return <div>{children}</div>;
-}
-
-
-// File: components/ui/Table.js
-export function Table({ children }) {
-  return (
-    <table className="min-w-full table-auto border-collapse">
-      {children}
-    </table>
-  );
-}
-
-export function TableHeader({ children }) {
-  return (
-    <thead className="bg-gray-100">
-      {children}
-    </thead>
-  );
-}
-
-export function TableBody({ children }) {
-  return <tbody>{children}</tbody>;
-}
-
-export function TableRow({ children }) {
-  return <tr className="border-b last:border-0">{children}</tr>;
-}
-
-export function TableCell({ children }) {
-  return <td className="p-2 text-center border">{children}</td>;
-}
-
-
-// File: pages/index.js
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -83,13 +6,10 @@ import { Table, TableHeader, TableBody, TableRow, TableCell } from '../component
 import { supabase } from '../lib/supabaseClient';
 import { format, isThisWeek, isThisMonth } from 'date-fns';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useSession, Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { useUser, SignInButton, SignOutButton } from '@supabase/auth-ui-react';
 
 export default function TeaManufacturingApp() {
-  const session = useSession();
-  const user = session?.user;
-
+  const { user } = useUser();
   const [formData, setFormData] = useState({
     date: '',
     inputKg: '',
@@ -160,7 +80,7 @@ export default function TeaManufacturingApp() {
     return (
       <div className="p-6 grid gap-6">
         <h1 className="text-2xl font-bold">CTC Tea Manufacturing Record</h1>
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+        <SignInButton />
       </div>
     );
   }
@@ -168,7 +88,7 @@ export default function TeaManufacturingApp() {
   return (
     <div className="p-6 grid gap-6">
       <h1 className="text-2xl font-bold">CTC Tea Manufacturing Record</h1>
-      <Button onClick={() => supabase.auth.signOut()}>Sign Out</Button>
+      <SignOutButton />
 
       <Card>
         <CardContent className="grid grid-cols-2 gap-4 p-4">
