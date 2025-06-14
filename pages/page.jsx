@@ -167,7 +167,6 @@ export default function TeaManufacturingApp() {
               <Bar dataKey="RecoveryGL" fill="#8884d8" />
               <Bar dataKey="RecoveryORS" fill="#82ca9d" />
               <Bar dataKey="CoalRatio" fill="#ffc658" />
-              <Bar dataKey="ElectricRatio" fill="#ff8042" />
               <Bar dataKey="ElectricRatio" fill="#ff8043" />
             </BarChart>
           </ResponsiveContainer>
