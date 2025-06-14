@@ -1,0 +1,18 @@
+{
+  "name": "ctc-tea-web-app",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@supabase/auth-ui-react": "^0.2.7",
+    "@supabase/supabase-js": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "next": "14.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "recharts": "^2.5.0"
+  }
+}
